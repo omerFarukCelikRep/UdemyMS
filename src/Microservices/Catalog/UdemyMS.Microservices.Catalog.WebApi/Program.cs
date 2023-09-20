@@ -1,6 +1,10 @@
+using UdemyMS.Microservices.Catalog.WebApi.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 {
+    builder.Services.AddWebApiServices(builder.Configuration);
+
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
