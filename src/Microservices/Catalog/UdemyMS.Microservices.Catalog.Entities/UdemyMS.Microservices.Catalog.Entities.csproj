@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Core\UdemyMS.Common.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>
