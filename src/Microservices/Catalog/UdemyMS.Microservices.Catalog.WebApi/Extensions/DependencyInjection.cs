@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using UdemyMS.Microservices.Catalog.Interfaces.Options;
 using UdemyMS.Microservices.Catalog.WebApi.Options;
 
 namespace UdemyMS.Microservices.Catalog.WebApi.Extensions;
@@ -16,7 +17,7 @@ public static class DependencyInjection
     {
         services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseSectionName));
 
-        services.AddSingleton(sp => sp.GetRequiredService<IOptions<DatabaseOptions>>().Value);
+        services.AddSingleton<IDatabaseOptions>(sp => sp.GetRequiredService<IOptions<DatabaseOptions>>().Value);
 
         return services;
     }
