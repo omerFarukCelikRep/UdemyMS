@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UdemyMS.Microservices.Catalog.Entities\UdemyMS.Microservices.Catalog.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
