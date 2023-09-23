@@ -11,4 +11,9 @@ public class Category : BaseEntity<ObjectId>
         Name = category.Name
     };
 
-   
+    public static implicit operator CategoryDetailsDto(Category category) => new()
+    {
+        Id = category.Id.ToString(),
+        Name = category.Name
+    };
+}
