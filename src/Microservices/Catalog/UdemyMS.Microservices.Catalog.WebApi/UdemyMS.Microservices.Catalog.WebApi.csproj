@@ -11,10 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Web\UdemyMS.Common.Web.csproj" />
     <ProjectReference Include="..\UdemyMS.Microservices.Catalog.Interfaces\UdemyMS.Microservices.Catalog.Interfaces.csproj" />
   </ItemGroup>
 
