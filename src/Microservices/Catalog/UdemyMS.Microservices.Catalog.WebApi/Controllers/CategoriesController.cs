@@ -12,4 +12,12 @@ public class CategoriesController : BaseController
     {
         _categoryService = categoryService;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _categoryService.GetAllAsync(cancellationToken);
+
+        return GetResult(result);
+    }
 }
