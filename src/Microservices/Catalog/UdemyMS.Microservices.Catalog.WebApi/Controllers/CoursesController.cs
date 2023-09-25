@@ -12,4 +12,12 @@ public class CoursesController : BaseController
     {
         _courseService = courseService;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _courseService.GetAllAsync(cancellationToken);
+
+        return GetResult(result);
+    }
 }
