@@ -20,4 +20,12 @@ public class CategoriesController : BaseController
 
         return GetResult(result);
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        var result = await _categoryService.GetByIdAsync(id, cancellationToken);
+
+        return GetResult(result);
+    }
 }
