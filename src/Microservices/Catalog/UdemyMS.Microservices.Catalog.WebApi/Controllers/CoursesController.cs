@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UdemyMS.Common.Web.Controllers;
 using UdemyMS.Microservices.Catalog.Interfaces.Services;
+using UdemyMS.Microservices.Catalog.WebApi.Models.Requests.Courses;
 
 namespace UdemyMS.Microservices.Catalog.WebApi.Controllers;
 [Route("api/[controller]")]
@@ -34,6 +35,14 @@ public class CoursesController : BaseController
     public async Task<IActionResult> GetAllByUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
         var result = await _courseService.GetAllByUserIdAsync(userId, cancellationToken);
+
+        return GetResult(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(CourseCreateRequest request, CancellationToken cancellationToken = default)
+    {
+        var result = await _courseService.CreateAsync(request, cancellationToken);
 
         return GetResult(result);
     }
