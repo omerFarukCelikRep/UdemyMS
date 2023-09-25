@@ -46,4 +46,12 @@ public class CoursesController : BaseController
 
         return GetResult(result);
     }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateAsync(CourseUpdateRequest request, CancellationToken cancellationToken = default)
+    {
+        var result = await _courseService.UpdateAsync(request, cancellationToken);
+
+        return GetResult(result);
+    }
 }
