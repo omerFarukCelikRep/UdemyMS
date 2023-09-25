@@ -54,4 +54,12 @@ public class CoursesController : BaseController
 
         return GetResult(result);
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteAsync(string id, CancellationToken cancellationToken = default)
+    {
+        var result = await _courseService.DeleteAsync(id, cancellationToken);
+
+        return GetResult(result);
+    }
 }
