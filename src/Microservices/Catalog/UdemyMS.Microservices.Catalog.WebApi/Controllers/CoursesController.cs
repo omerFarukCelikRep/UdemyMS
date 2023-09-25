@@ -28,4 +28,13 @@ public class CoursesController : BaseController
 
         return GetResult(result);
     }
+
+    [HttpGet]
+    [Route("/api/[contoller]/GetAllByUserId/{userId}")]
+    public async Task<IActionResult> GetAllByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        var result = await _courseService.GetAllByUserIdAsync(userId, cancellationToken);
+
+        return GetResult(result);
+    }
 }
