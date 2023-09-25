@@ -26,9 +26,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Common.Core", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.Catalog.WebApi", "src\Microservices\Catalog\UdemyMS.Microservices.Catalog.WebApi\UdemyMS.Microservices.Catalog.WebApi.csproj", "{7DA41F0F-41C1-4460-BC79-C49A7F40B05F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Catalog.Interfaces", "src\Microservices\Catalog\UdemyMS.Microservices.Catalog.Interfaces\UdemyMS.Microservices.Catalog.Interfaces.csproj", "{CC9A923B-9E37-49F8-8775-FA498627148A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.Catalog.Interfaces", "src\Microservices\Catalog\UdemyMS.Microservices.Catalog.Interfaces\UdemyMS.Microservices.Catalog.Interfaces.csproj", "{CC9A923B-9E37-49F8-8775-FA498627148A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Catalog.Infrastructure", "src\Microservices\Catalog\UdemyMS.Microservices.Catalog.Infrastructure\UdemyMS.Microservices.Catalog.Infrastructure.csproj", "{0B2FB7DF-B903-4374-9D03-F881916C637A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.Catalog.Infrastructure", "src\Microservices\Catalog\UdemyMS.Microservices.Catalog.Infrastructure\UdemyMS.Microservices.Catalog.Infrastructure.csproj", "{0B2FB7DF-B903-4374-9D03-F881916C637A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Common.Web", "src\Common\UdemyMS.Common.Web\UdemyMS.Common.Web.csproj", "{481DE6FC-359A-4A8C-B4F7-B6C251D0B379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Common.Utilities", "src\Common\UdemyMS.Common.Utilities\UdemyMS.Common.Utilities.csproj", "{D378EC96-7925-43FB-A767-79C858240290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +60,14 @@ Global
 		{0B2FB7DF-B903-4374-9D03-F881916C637A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B2FB7DF-B903-4374-9D03-F881916C637A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B2FB7DF-B903-4374-9D03-F881916C637A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D378EC96-7925-43FB-A767-79C858240290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D378EC96-7925-43FB-A767-79C858240290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D378EC96-7925-43FB-A767-79C858240290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D378EC96-7925-43FB-A767-79C858240290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +83,8 @@ Global
 		{7DA41F0F-41C1-4460-BC79-C49A7F40B05F} = {CE94C344-8AB1-465C-96B3-3B2A5260B36C}
 		{CC9A923B-9E37-49F8-8775-FA498627148A} = {CE94C344-8AB1-465C-96B3-3B2A5260B36C}
 		{0B2FB7DF-B903-4374-9D03-F881916C637A} = {CE94C344-8AB1-465C-96B3-3B2A5260B36C}
+		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379} = {8E8C8731-88C6-4380-89A7-67A9D16C5721}
+		{D378EC96-7925-43FB-A767-79C858240290} = {8E8C8731-88C6-4380-89A7-67A9D16C5721}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A628549-523B-40DA-97F0-65E5DE0ADC72}
