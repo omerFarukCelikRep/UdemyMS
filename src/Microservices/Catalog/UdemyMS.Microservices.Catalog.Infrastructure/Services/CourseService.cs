@@ -84,4 +84,15 @@ public class CourseService : ICourseService
 
         return Result<CourseDetailsDto>.Success(course, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result> UpdateAsync(CourseUpdateDto courseUpdate, CancellationToken cancellationToken = default)
+    {
+        Course course = courseUpdate;
+
+        var result = await _courses.ReplaceOneAsync(c => c.Id == course.Id, course, cancellationToken: cancellationToken);
+        if (result == null)
+            return Result.Error("Course Not Found", (int)HttpStatusCode.NotFound); //TODO:Magic string
+
+        return Result.Success((int)HttpStatusCode.NoContent);
+    }
 }
