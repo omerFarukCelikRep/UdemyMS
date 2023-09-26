@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using UdemyMS.Microservices.Catalog.Entities.Dtos.Courses;
 
 namespace UdemyMS.Microservices.Catalog.Entities.DbSets;
 public class Course : BaseEntity<ObjectId>
@@ -18,4 +19,22 @@ public class Course : BaseEntity<ObjectId>
 
     [BsonRepresentation(BsonType.ObjectId)]
     public string CategoryId { get; set; }
+
+    public static implicit operator CourseListDto(Course course) => new()
+    {
+        Id = course.Id.ToString(),
+        Name = course.Name,
+        Description = course.Description,
+        Price = course.Price,
+        Thumbnail = course.Thumbnail
+    };
+
+    public static implicit operator CourseDetailsDto(Course course) => new()
+    {
+        Id = course.Id.ToString(),
+        Name = course.Name,
+        Description = course.Description,
+        Price = course.Price,
+        Thumbnail = course.Thumbnail
+    };
 }
