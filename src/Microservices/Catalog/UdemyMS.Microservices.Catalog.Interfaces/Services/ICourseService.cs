@@ -9,4 +9,5 @@ public interface ICourseService
     Task<Result<List<CourseListDto>>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<Result<List<CourseListDto>>> GetAllByUserIdAsync(string userId, CancellationToken cancellationToken = default);
     Task<Result<CourseDetailsDto>> GetByIdAsync(string courseId, CancellationToken cancellationToken = default);
+    Task<Result> UpdateAsync(CourseUpdateDto courseUpdate, CancellationToken cancellationToken = default);
 }
