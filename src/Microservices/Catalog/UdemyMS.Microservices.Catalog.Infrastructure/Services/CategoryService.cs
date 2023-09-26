@@ -30,4 +30,12 @@ public class CategoryService : ICategoryService
 
         return Result<List<CategoryListDto>>.Success(categories, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result<CategoryDetailsDto>> CreateAsync(CategoryCreateDto createCategory, CancellationToken cancellationToken = default)
+    {
+        Category category = createCategory;
+        await _categories.InsertOneAsync(category, cancellationToken: cancellationToken);
+
+        return Result<CategoryDetailsDto>.Success(category, (int)HttpStatusCode.OK);
+    }
 }
