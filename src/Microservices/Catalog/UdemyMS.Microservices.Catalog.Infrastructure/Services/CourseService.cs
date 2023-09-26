@@ -95,4 +95,13 @@ public class CourseService : ICourseService
 
         return Result.Success((int)HttpStatusCode.NoContent);
     }
+
+    public async Task<Result> DeleteAsync(string courseId, CancellationToken cancellationToken = default)
+    {
+        var result = await _courses.DeleteOneAsync(c => c.Id == ObjectId.Parse(courseId), cancellationToken);
+        if (result.DeletedCount > 0)
+            return Result.Success((int)HttpStatusCode.NoContent);
+
+        return Result.Error("Course Not Found", (int)HttpStatusCode.NotFound); //TODO:Magic string
+    }
 }
