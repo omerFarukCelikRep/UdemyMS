@@ -1,5 +1,9 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Net;
+using UdemyMS.Common.Core.Utilities.Results;
 using UdemyMS.Microservices.Catalog.Entities.DbSets;
+using UdemyMS.Microservices.Catalog.Entities.Dtos.Categories;
 using UdemyMS.Microservices.Catalog.Interfaces.Options;
 using UdemyMS.Microservices.Catalog.Interfaces.Services;
 
@@ -15,5 +19,15 @@ public class CategoryService : ICategoryService
         var database = client.GetDatabase(databaseOptions.Name);
 
         _categories = database.GetCollection<Category>(CollectionName);
+    }
+
+    public async Task<Result<List<CategoryListDto>>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var categoriesCursor = await _categories.FindAsync(c => true, cancellationToken: cancellationToken);
+        var categories = categoriesCursor.ToEnumerable(cancellationToken)
+                                         .Select(category => (CategoryListDto)category)
+                                         .ToList();
+
+        return Result<List<CategoryListDto>>.Success(categories, (int)HttpStatusCode.OK);
     }
 }
