@@ -7,4 +7,5 @@ public interface ICourseService
     Task<Result<CourseDetailsDto>> CreateAsync(CourseCreateDto courseCreate, CancellationToken cancellationToken = default);
     Task<Result> DeleteAsync(string courseId, CancellationToken cancellationToken = default);
     Task<Result<List<CourseListDto>>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<Result<List<CourseListDto>>> GetAllByUserIdAsync(string userId, CancellationToken cancellationToken = default);
 }
