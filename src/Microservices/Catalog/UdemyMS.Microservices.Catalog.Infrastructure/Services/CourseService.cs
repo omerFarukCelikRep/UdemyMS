@@ -58,4 +58,22 @@ public class CourseService : ICourseService
 
         return Result<CourseDetailsDto>.Success(courseDetails, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result<List<CourseListDto>>> GetAllByUserIdAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        var coursesCursor = await _courses.FindAsync(c => c.UserId == Guid.Parse(userId), cancellationToken: cancellationToken);
+        var courses = coursesCursor.ToEnumerable(cancellationToken)
+                                         .Select(course => (CourseListDto)course)
+                                         .ToList();
+
+        foreach (var course in courses)
+        {
+            var categoryCursor = await _categories.FindAsync(c => c.Id == ObjectId.Parse(course.CategoryId), cancellationToken: cancellationToken);
+            var category = await categoryCursor.FirstOrDefaultAsync(cancellationToken);
+
+            course.Category = (CourseCategoryListDto)category;
+        }
+
+        return Result<List<CourseListDto>>.Success(courses, (int)HttpStatusCode.OK);
+    }
 }
