@@ -42,4 +42,20 @@ public class CourseService : ICourseService
 
         return Result<List<CourseListDto>>.Success(courses, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result<CourseDetailsDto>> GetByIdAsync(string courseId, CancellationToken cancellationToken = default)
+    {
+        var courseCursor = await _courses.FindAsync(c => c.Id == ObjectId.Parse(courseId), cancellationToken: cancellationToken);
+        var course = await courseCursor.FirstOrDefaultAsync(cancellationToken);
+        if (course is null)
+            return Result<CourseDetailsDto>.Error("Course Not Found", (int)HttpStatusCode.NotFound); //TODO:Magic string
+
+        var courseDetails = (CourseDetailsDto)course;
+
+        var categoryCursor = await _categories.FindAsync(c => c.Id == ObjectId.Parse(course.CategoryId), cancellationToken: cancellationToken);
+        var category = await categoryCursor.FirstOrDefaultAsync(cancellationToken);
+        courseDetails.Category = (CourseCategoryDetailsDto)category;
+
+        return Result<CourseDetailsDto>.Success(courseDetails, (int)HttpStatusCode.OK);
+    }
 }
