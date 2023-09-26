@@ -38,4 +38,12 @@ public class CategoryService : ICategoryService
 
         return Result<CategoryDetailsDto>.Success(category, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result<CategoryDetailsDto>> GetByIdAsync(string categoryId, CancellationToken cancellationToken = default)
+    {
+        var categoryCursor = await _categories.FindAsync(c => c.Id == ObjectId.Parse(categoryId), cancellationToken: cancellationToken);
+        var category = await categoryCursor.FirstOrDefaultAsync(cancellationToken);
+
+        return Result<CategoryDetailsDto>.Success(category, (int)HttpStatusCode.OK);
+    }
 }
