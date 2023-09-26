@@ -76,4 +76,12 @@ public class CourseService : ICourseService
 
         return Result<List<CourseListDto>>.Success(courses, (int)HttpStatusCode.OK);
     }
+
+    public async Task<Result<CourseDetailsDto>> CreateAsync(CourseCreateDto courseCreate, CancellationToken cancellationToken = default)
+    {
+        Course course = courseCreate;
+        await _courses.InsertOneAsync(course, cancellationToken: cancellationToken);
+
+        return Result<CourseDetailsDto>.Success(course, (int)HttpStatusCode.OK);
+    }
 }
