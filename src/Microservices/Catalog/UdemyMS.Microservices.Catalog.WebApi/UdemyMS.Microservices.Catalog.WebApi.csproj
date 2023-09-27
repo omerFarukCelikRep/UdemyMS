@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Web\UdemyMS.Common.Web.csproj" />
+    <ProjectReference Include="..\UdemyMS.Microservices.Catalog.Infrastructure\UdemyMS.Microservices.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\UdemyMS.Microservices.Catalog.Interfaces\UdemyMS.Microservices.Catalog.Interfaces.csproj" />
   </ItemGroup>
 
