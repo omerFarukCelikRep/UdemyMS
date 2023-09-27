@@ -11,7 +11,12 @@ public static class DependencyInjection
     {
         services.AddEFCoreServices(configuration)
                 .AddCustomIdentity()
-                .AddCustomIdentityServer();
+                .AddCustomIdentityServer()
+                .AddControllers();
+
+        services.AddEndpointsApiExplorer()
+                        .AddSwaggerGen();
+
 
         return services;
     }
@@ -53,6 +58,8 @@ public static class DependencyInjection
                 new IdentityResources.Phone(),
             })
             .AddAspNetIdentity<IdentityUser>();
+
+        services.AddLogging(options => options.AddFilter("Duende", LogLevel.Debug));
 
         return services;
     }
