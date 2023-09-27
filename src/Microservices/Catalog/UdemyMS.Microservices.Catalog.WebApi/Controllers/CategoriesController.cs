@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using UdemyMS.Common.Core.Utilities.Results;
 using UdemyMS.Common.Web.Controllers;
+using UdemyMS.Microservices.Catalog.Entities.Dtos.Categories;
 using UdemyMS.Microservices.Catalog.Interfaces.Services;
 using UdemyMS.Microservices.Catalog.WebApi.Models.Requests.Category;
 
@@ -23,6 +26,7 @@ public class CategoriesController : BaseController
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(Result<CategoryDetailsDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdAsync(string id, CancellationToken cancellationToken = default)
     {
         var result = await _categoryService.GetByIdAsync(id, cancellationToken);
