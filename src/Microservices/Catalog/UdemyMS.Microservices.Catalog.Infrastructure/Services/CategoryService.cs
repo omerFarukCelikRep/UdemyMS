@@ -16,7 +16,7 @@ public class CategoryService : ICategoryService
     public CategoryService(IDatabaseOptions databaseOptions)
     {
         var client = new MongoClient(databaseOptions.Connection);
-        var database = client.GetDatabase(databaseOptions.Name);
+        var database = client.GetDatabase(databaseOptions.DatabaseName);
 
         _categories = database.GetCollection<Category>(CollectionName);
     }
