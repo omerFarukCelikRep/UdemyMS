@@ -5,11 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     builder.Services.AddInfrastructureServices()
-                    .AddWebApiServices(builder.Configuration);
-
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+                    .AddWebApiServices(builder.Configuration);  
 }
 
 var app = builder.Build();

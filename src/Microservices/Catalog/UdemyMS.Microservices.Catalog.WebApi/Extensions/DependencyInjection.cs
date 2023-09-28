@@ -9,7 +9,11 @@ public static class DependencyInjection
     private const string DatabaseSectionName = "Database";
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOptions(configuration);
+        services.AddOptions(configuration)
+                .AddControllers();
+
+        services.AddEndpointsApiExplorer()
+                .AddSwaggerGen();
         return services;
     }
 
