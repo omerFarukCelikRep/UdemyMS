@@ -1,7 +1,8 @@
-﻿using Duende.IdentityServer.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UdemyMS.ExternalServices.IdentityServer.Data;
+using UdemyMS.ExternalServices.IdentityServer.Data.Context;
+using UdemyMS.ExternalServices.IdentityServer.Data.DbSets;
+using UdemyMS.ExternalServices.IdentityServer.Validators;
 
 namespace UdemyMS.ExternalServices.IdentityServer.Extensions;
 
@@ -12,6 +13,7 @@ public static class DependencyInjection
         services.AddEFCoreServices(configuration)
                 .AddCustomIdentity()
                 .AddCustomIdentityServer()
+                .AddLocalApiAuthentication()
                 .AddControllers();
 
         services.AddEndpointsApiExplorer()
@@ -28,7 +30,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddCustomIdentity(this IServiceCollection services)
     {
-        services.AddIdentity<IdentityUser, IdentityRole>()
+        services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityServerDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -38,26 +40,12 @@ public static class DependencyInjection
     private static IServiceCollection AddCustomIdentityServer(this IServiceCollection services)
     {
         services.AddIdentityServer()
-            .AddInMemoryClients(new Client[]
-            {
-                new Client
-                {
-                    ClientId = "client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    RedirectUris = { "https://localhost:5002/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
-                    AllowedScopes = { "openid", "profile", "email", "phone" }
-                }
-            })
-            .AddInMemoryIdentityResources(new IdentityResource[]
-            {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-                new IdentityResources.Email(),
-                new IdentityResources.Phone(),
-            })
-            .AddAspNetIdentity<IdentityUser>();
+            .AddInMemoryIdentityResources(Config.IdentityResources)
+            .AddInMemoryApiResources(Config.ApiResources)
+            .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryClients(Config.Clients)
+            .AddAspNetIdentity<AppUser>()
+            .AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
         services.AddLogging(options => options.AddFilter("Duende", LogLevel.Debug));
 
