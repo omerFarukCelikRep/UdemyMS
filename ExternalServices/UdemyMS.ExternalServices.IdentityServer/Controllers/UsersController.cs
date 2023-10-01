@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using UdemyMS.Common.Core.Utilities.Results;
 using UdemyMS.Common.Web.Controllers;
 using UdemyMS.ExternalServices.IdentityServer.Data.DbSets;
 using UdemyMS.ExternalServices.IdentityServer.Models.Requests;
+using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace UdemyMS.ExternalServices.IdentityServer.Controllers;
+
+[Authorize(LocalApi.PolicyName)]
 public class UsersController : BaseController
 {
     private readonly UserManager<AppUser> _userManager;
@@ -15,7 +19,7 @@ public class UsersController : BaseController
         _userManager = userManager;
     }
 
-    [HttpPost]
+    [HttpPost("signup")]
     public async Task<IActionResult> SignUpAsync(SignUpRequest request, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
