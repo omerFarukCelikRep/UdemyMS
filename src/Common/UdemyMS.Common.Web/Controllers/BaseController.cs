@@ -2,6 +2,9 @@
 using UdemyMS.Common.Core.Utilities.Results;
 
 namespace UdemyMS.Common.Web.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
 public class BaseController : ControllerBase
 {
     [NonAction]
