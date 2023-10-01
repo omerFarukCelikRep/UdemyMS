@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Options;
 using UdemyMS.Microservices.Catalog.Interfaces.Options;
 using UdemyMS.Microservices.Catalog.WebApi.Options;
 
@@ -10,7 +12,8 @@ public static class DependencyInjection
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddOptions(configuration)
-                .AddControllers();
+                .AddCustomAuthentication(configuration)
+                .AddControllers(opts => opts.Filters.Add(new AuthorizeFilter()));
 
         services.AddEndpointsApiExplorer()
                 .AddSwaggerGen();
@@ -22,6 +25,20 @@ public static class DependencyInjection
         services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseSectionName));
 
         services.AddSingleton<IDatabaseOptions>(sp => sp.GetRequiredService<IOptions<DatabaseOptions>>().Value);
+
+        return services;
+    }
+
+    private static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opts =>
+                {
+                    opts.Authority = configuration["IdentityServer"];
+                    opts.Audience = "resource_catalog";
+                    opts.RequireHttpsMetadata = false;
+                });
+
 
         return services;
     }
