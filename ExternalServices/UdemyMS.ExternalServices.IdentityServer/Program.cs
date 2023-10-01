@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UdemyMS.ExternalServices.IdentityServer.Data;
+using UdemyMS.ExternalServices.IdentityServer.Data.Context;
+using UdemyMS.ExternalServices.IdentityServer.Data.DbSets;
 using UdemyMS.ExternalServices.IdentityServer.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,8 +35,8 @@ async Task MigrateDbAsync()
     var dbContext = serviceProvider.GetRequiredService<IdentityServerDbContext>();
 
     dbContext?.Database.Migrate();
-    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
 
     if (userManager != null && !await userManager.Users.AnyAsync())
-        await userManager.CreateAsync(new IdentityUser { UserName = "ofcelik", Email = "email@email.com" }, "newPassword+0");
+        await userManager.CreateAsync(new AppUser { UserName = "ofcelik", Email = "email@email.com", City = "Ýstanbul" }, "newPassword+0");
 }
