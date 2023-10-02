@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using UdemyMS.Common.Core.Utilities.Results;
 using UdemyMS.Common.Web.Controllers;
 using UdemyMS.ExternalServices.IdentityServer.Data.DbSets;
 using UdemyMS.ExternalServices.IdentityServer.Models.Requests;
+using UdemyMS.ExternalServices.IdentityServer.Models.Responses;
 using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace UdemyMS.ExternalServices.IdentityServer.Controllers;
@@ -33,5 +35,19 @@ public class UsersController : BaseController
         }
 
         return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUserAsync(CancellationToken cancellationToken = default)
+    {
+        var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
+        if (userIdClaim is null)
+            return BadRequest();
+
+        var user = await _userManager.FindByIdAsync(userIdClaim.Value);
+        if (user is null)
+            return BadRequest();
+
+        return GetResult(Result<GetUserResponse>.Success(user, (int)HttpStatusCode.OK));
     }
 }
