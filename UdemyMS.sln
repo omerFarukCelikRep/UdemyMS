@@ -34,7 +34,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Common.Web", "src\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Common.Utilities", "src\Common\UdemyMS.Common.Utilities\UdemyMS.Common.Utilities.csproj", "{D378EC96-7925-43FB-A767-79C858240290}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.ExternalServices.IdentityServer", "ExternalServices\UdemyMS.ExternalServices.IdentityServer\UdemyMS.ExternalServices.IdentityServer.csproj", "{20623D02-78E4-4455-BEEF-13CD58F3F595}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhotoStock", "PhotoStock", "{A6A5103A-3AE6-47E3-BCE4-F1FB49186F7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.PhotoStock.WebApi", "src\Microservices\PhotoStock\UdemyMS.Microservices.PhotoStock.WebApi\UdemyMS.Microservices.PhotoStock.WebApi.csproj", "{A555D42A-8272-4DC9-BA97-B1E4AB236A5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.ExternalServices.IdentityServer", "src\ExternalServices\UdemyMS.ExternalServices.IdentityServer\UdemyMS.ExternalServices.IdentityServer.csproj", "{F0A3F671-AED1-4920-89E2-00B558DF8F04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,10 +74,14 @@ Global
 		{D378EC96-7925-43FB-A767-79C858240290}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D378EC96-7925-43FB-A767-79C858240290}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D378EC96-7925-43FB-A767-79C858240290}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20623D02-78E4-4455-BEEF-13CD58F3F595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20623D02-78E4-4455-BEEF-13CD58F3F595}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20623D02-78E4-4455-BEEF-13CD58F3F595}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20623D02-78E4-4455-BEEF-13CD58F3F595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A555D42A-8272-4DC9-BA97-B1E4AB236A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A555D42A-8272-4DC9-BA97-B1E4AB236A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A555D42A-8272-4DC9-BA97-B1E4AB236A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A555D42A-8272-4DC9-BA97-B1E4AB236A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0A3F671-AED1-4920-89E2-00B558DF8F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0A3F671-AED1-4920-89E2-00B558DF8F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0A3F671-AED1-4920-89E2-00B558DF8F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0A3F671-AED1-4920-89E2-00B558DF8F04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,7 +99,9 @@ Global
 		{0B2FB7DF-B903-4374-9D03-F881916C637A} = {CE94C344-8AB1-465C-96B3-3B2A5260B36C}
 		{481DE6FC-359A-4A8C-B4F7-B6C251D0B379} = {8E8C8731-88C6-4380-89A7-67A9D16C5721}
 		{D378EC96-7925-43FB-A767-79C858240290} = {8E8C8731-88C6-4380-89A7-67A9D16C5721}
-		{20623D02-78E4-4455-BEEF-13CD58F3F595} = {42BF9B8E-9E46-479B-884E-357F81A159A5}
+		{A6A5103A-3AE6-47E3-BCE4-F1FB49186F7F} = {742889C8-C2A8-4EF4-A667-3745D8382C7B}
+		{A555D42A-8272-4DC9-BA97-B1E4AB236A5F} = {A6A5103A-3AE6-47E3-BCE4-F1FB49186F7F}
+		{F0A3F671-AED1-4920-89E2-00B558DF8F04} = {42BF9B8E-9E46-479B-884E-357F81A159A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A628549-523B-40DA-97F0-65E5DE0ADC72}
