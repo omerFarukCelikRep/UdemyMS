@@ -1,2 +1,6 @@
+ExternalServices
+	- IdentityServer => 5069
+
 Microservices
-	- Catalog => 5011 
+	- Catalog => 5011
+	- PhotoStock => 5027
