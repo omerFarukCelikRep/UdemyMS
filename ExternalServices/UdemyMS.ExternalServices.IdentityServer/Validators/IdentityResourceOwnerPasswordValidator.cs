@@ -20,10 +20,10 @@ public class IdentityResourceOwnerPasswordValidator : IResourceOwnerPasswordVali
         {
             AssignErrors(context);
             return;
-        };
+        }
 
         var passwordCheck = await _userManager.CheckPasswordAsync(user, context.Password);
-        if (passwordCheck)
+        if (!passwordCheck)
         {
             AssignErrors(context);
             return;
