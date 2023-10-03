@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using UdemyMS.Common.Utilities;
 
 namespace UdemyMS.ExternalServices.IdentityServer;
 
@@ -21,15 +22,15 @@ public static class Config
 
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
-        new ApiResource("resource_catalog"){Scopes = { "catalog_fullpermission" } },
-        new ApiResource("resource_photo_stock"){Scopes = { "photo_stock_fullpermission" } },
+        new ApiResource(Constants.IdentityServer.Resources.Catalog){Scopes = { Constants.IdentityServer.Permissions.Catalog } },
+        new ApiResource(Constants.IdentityServer.Resources.PhotoStock){Scopes = { Constants.IdentityServer.Permissions.PhotoStock } },
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
 
     public static IEnumerable<ApiScope> ApiScopes => new ApiScope[]
     {
-        new ApiScope("catalog_fullpermission","Catalog Api Tam Erişim"),
-        new ApiScope("photo_stock_fullpermission","Photo Stock Api Tam Erişim"),
+        new ApiScope(Constants.IdentityServer.Permissions.Catalog,"Catalog Api Tam Erişim"),
+        new ApiScope(Constants.IdentityServer.Permissions.PhotoStock,"Photo Stock Api Tam Erişim"),
         new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -44,7 +45,12 @@ public static class Config
                 new Secret("secret".Sha256())
             },
             AllowedGrantTypes = GrantTypes.ClientCredentials,
-            AllowedScopes = { "catalog_fullpermission", "photo_stock_fullpermission",IdentityServerConstants.LocalApi.ScopeName }
+            AllowedScopes =
+            {
+                Constants.IdentityServer.Permissions.Catalog,
+                Constants.IdentityServer.Permissions.PhotoStock,
+                IdentityServerConstants.LocalApi.ScopeName
+            }
         },
         new Client
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using UdemyMS.Common.Utilities;
 using UdemyMS.Microservices.Catalog.Interfaces.Options;
 using UdemyMS.Microservices.Catalog.WebApi.Options;
 
@@ -34,11 +35,10 @@ public static class DependencyInjection
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opts =>
                 {
-                    opts.Authority = configuration["IdentityServer"];
-                    opts.Audience = "resource_catalog";
+                    opts.Authority = configuration[Constants.IdentityServer.ConfigName];
+                    opts.Audience = Constants.IdentityServer.Resources.Catalog;
                     opts.RequireHttpsMetadata = false;
                 });
-
 
         return services;
     }
