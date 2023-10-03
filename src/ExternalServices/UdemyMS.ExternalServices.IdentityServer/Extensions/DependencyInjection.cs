@@ -47,7 +47,7 @@ public static class DependencyInjection
             .AddAspNetIdentity<AppUser>()
             .AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
-        services.AddLogging(options => options.AddFilter("Duende", LogLevel.Debug));
+        services.AddLogging(options => options.AddFilter(Constants, LogLevel.Debug));
 
         return services;
     }
