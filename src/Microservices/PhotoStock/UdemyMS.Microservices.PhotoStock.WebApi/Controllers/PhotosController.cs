@@ -23,4 +23,19 @@ public class PhotosController : BaseController
 
         return GetResult(Result<PhotoSaveResponse>.Success(response, (int)HttpStatusCode.OK));
     }
+
+    [HttpDelete]
+    public Task<IActionResult> DeleteAsync(string url, CancellationToken cancellationToken = default)
+    {
+        if (cancellationToken.IsCancellationRequested)
+            return Task.FromCanceled<IActionResult>(cancellationToken);
+
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", url);
+        if (!System.IO.File.Exists(path))
+            return Task.FromResult(GetResult(Result.Error("PhotoNotFound", (int)HttpStatusCode.NotFound)));
+
+        System.IO.File.Delete(path);
+
+        return Task.FromResult(GetResult(Result.Success((int)HttpStatusCode.NoContent)));
+    }
 }
