@@ -30,4 +30,12 @@ public class BasketsController : BaseController
 
         return GetResult(result);
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _basketService.DeleteAsync(_identityService.UserId, cancellationToken);
+
+        return GetResult(result);
+    }
 }
