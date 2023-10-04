@@ -4,3 +4,4 @@ ExternalServices
 Microservices
 	- Catalog => 5011
 	- PhotoStock => 5027
+	- Basket => 5079
