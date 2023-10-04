@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UdemyMS.Common.Utilities;
 using UdemyMS.ExternalServices.IdentityServer.Data.Context;
 using UdemyMS.ExternalServices.IdentityServer.Data.DbSets;
 using UdemyMS.ExternalServices.IdentityServer.Validators;
@@ -47,7 +48,7 @@ public static class DependencyInjection
             .AddAspNetIdentity<AppUser>()
             .AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
-        services.AddLogging(options => options.AddFilter(Constants, LogLevel.Debug));
+        services.AddLogging(options => options.AddFilter(Constants.IdentityServer.LogFilterName, LogLevel.Debug));
 
         return services;
     }
