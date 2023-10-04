@@ -1,4 +1,5 @@
-﻿using UdemyMS.Common.Web.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using UdemyMS.Common.Web.Controllers;
 using UdemyMS.Common.Web.Services;
 using UdemyMS.Microservices.Basket.WebApi.Services;
 
@@ -11,5 +12,13 @@ public class BasketsController : BaseController
     {
         _basketService = basketService;
         _identityService = identityService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _basketService.GetAsync(_identityService.UserId, cancellationToken);
+
+        return GetResult(result);
     }
 }
