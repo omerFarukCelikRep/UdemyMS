@@ -361,5 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/ExternalServices/UdemyMS.ExternalServices.IdentityServer/Migrations
 /src/ExternalServices/UdemyMS.ExternalServices.IdentityServer/Migrations
+/src/ExternalServices/UdemyMS.ExternalServices.IdentityServer/keys
+/src/Microservices/PhotoStock/UdemyMS.Microservices.PhotoStock.WebApi/wwwroot/photos
