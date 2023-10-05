@@ -25,4 +25,16 @@ public class BasketService : IBasketService
 
         return Result<BasketGetDto>.Success(basket, StatusCodes.Status200OK);
     }
+
+    public async Task<Result> SaveOrUpdateAsync(BasketCreateDto basketCreateDto, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var status = await _redisService.GetDatabase()
+                                        .StringSetAsync(basketCreateDto.UserId, JsonSerializer.Serialize(basketCreateDto));
+
+        return status
+            ? Result.Success(StatusCodes.Status200OK)
+            : Result.Error("Basket could not updated or saved", StatusCodes.Status400BadRequest); //TODO:Magic string
+    }
 }

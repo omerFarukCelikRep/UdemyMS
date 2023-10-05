@@ -6,4 +6,5 @@ namespace UdemyMS.Microservices.Basket.WebApi.Services;
 public interface IBasketService
 {
     Task<Result<BasketGetDto>> GetAsync(string userId, CancellationToken cancellationToken = default);
+    Task<Result> SaveOrUpdateAsync(BasketCreateDto basketCreateDto, CancellationToken cancellationToken = default);
 }
