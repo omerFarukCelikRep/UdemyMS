@@ -18,4 +18,12 @@ public static class Constants
             public const string PhotoStock = "photo_stock_fullpermission";
         }
     }
+
+    public struct Identity
+    {
+        public struct Claim
+        {
+            public const string Sub = "sub";
+        }
+    }
 }
