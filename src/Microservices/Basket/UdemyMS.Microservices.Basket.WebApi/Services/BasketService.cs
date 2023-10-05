@@ -12,6 +12,18 @@ public class BasketService : IBasketService
         _redisService = redisService;
     }
 
+    public async Task<Result> DeleteAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var status = await _redisService.GetDatabase()
+                                        .KeyDeleteAsync(userId);
+
+        return status
+            ? Result.Success(StatusCodes.Status204NoContent)
+            : Result.Error("Basket Not Found", StatusCodes.Status404NotFound); //TODO:Magic string
+    }
+
     public async Task<Result<BasketGetDto>> GetAsync(string userId, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
