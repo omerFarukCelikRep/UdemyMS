@@ -35,7 +35,7 @@ public class BasketService : IBasketService
 
         var basket = JsonSerializer.Deserialize<BasketGetDto>(basketAsString!);
 
-        return Result<BasketGetDto>.Success(basket, StatusCodes.Status200OK);
+        return Result<BasketGetDto>.Success(basket!, StatusCodes.Status200OK);
     }
 
     public async Task<Result> SaveOrUpdateAsync(BasketCreateDto basketCreateDto, CancellationToken cancellationToken = default)

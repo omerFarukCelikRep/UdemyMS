@@ -15,7 +15,8 @@ public class BasketCreateRequest
         {
             UserId = request.UserId,
             DiscountCode = request.DiscountCode,
-            BasketItems = request.BasketItems.Select(x => (BasketItemCreateDto)x).ToList(),
+            BasketItems = request.BasketItems.Select(x => (BasketItemCreateDto)x)
+                                             .ToList(),
         };
     }
 }
