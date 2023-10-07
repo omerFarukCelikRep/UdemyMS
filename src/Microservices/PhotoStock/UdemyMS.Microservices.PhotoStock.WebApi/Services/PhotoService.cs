@@ -22,4 +22,18 @@ public class PhotoService : IPhotoService
 
         return Result<PhotoSaveDto>.Success(savedPhoto, StatusCodes.Status200OK);
     }
+
+    public Task<Result> DeleteAsync(string url, CancellationToken cancellationToken = default)
+    {
+        if (cancellationToken.IsCancellationRequested)
+            return Task.FromCanceled<Result>(cancellationToken);
+
+        var path = Path.Combine(Directory.GetCurrentDirectory(), RootPath, url);
+        if (!File.Exists(path))
+            return Task.FromResult(Result.Error("PhotoNotFound", StatusCodes.Status404NotFound)); //TODO:Magic string
+
+        File.Delete(path);
+
+        return Task.FromResult(Result.Success(StatusCodes.Status204NoContent));
+    }
 }
