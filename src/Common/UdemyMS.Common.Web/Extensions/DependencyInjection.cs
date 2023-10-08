@@ -8,6 +8,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IIdentityService, IdentityService>();
 
+        services.AddHttpContextAccessor();
+
         return services;
     }
 }
