@@ -40,9 +40,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.Photo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.ExternalServices.IdentityServer", "src\ExternalServices\UdemyMS.ExternalServices.IdentityServer\UdemyMS.ExternalServices.IdentityServer.csproj", "{F0A3F671-AED1-4920-89E2-00B558DF8F04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Basket.WebApi", "src\Microservices\Basket\UdemyMS.Microservices.Basket.WebApi\UdemyMS.Microservices.Basket.WebApi.csproj", "{5B42F48B-66B0-4B72-BE4D-205B93CDD219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyMS.Microservices.Basket.WebApi", "src\Microservices\Basket\UdemyMS.Microservices.Basket.WebApi\UdemyMS.Microservices.Basket.WebApi.csproj", "{5B42F48B-66B0-4B72-BE4D-205B93CDD219}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{D6116F0F-FE40-4B76-9785-010ED77EAB09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{9BB727DE-82E2-4BCE-A9B3-0BE1829457F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Discount.WebApi", "src\Microservices\Discount\UdemyMS.Microservices.Discount.WebApi\UdemyMS.Microservices.Discount.WebApi.csproj", "{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +94,10 @@ Global
 		{5B42F48B-66B0-4B72-BE4D-205B93CDD219}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B42F48B-66B0-4B72-BE4D-205B93CDD219}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B42F48B-66B0-4B72-BE4D-205B93CDD219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +120,8 @@ Global
 		{F0A3F671-AED1-4920-89E2-00B558DF8F04} = {42BF9B8E-9E46-479B-884E-357F81A159A5}
 		{5B42F48B-66B0-4B72-BE4D-205B93CDD219} = {D6116F0F-FE40-4B76-9785-010ED77EAB09}
 		{D6116F0F-FE40-4B76-9785-010ED77EAB09} = {742889C8-C2A8-4EF4-A667-3745D8382C7B}
+		{9BB727DE-82E2-4BCE-A9B3-0BE1829457F4} = {742889C8-C2A8-4EF4-A667-3745D8382C7B}
+		{FD900D69-38F3-458E-97E6-FFFFBEFAFCD3} = {9BB727DE-82E2-4BCE-A9B3-0BE1829457F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A628549-523B-40DA-97F0-65E5DE0ADC72}
