@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 using UdemyMS.Common.Web.Extensions;
 using UdemyMS.Microservices.Basket.WebApi.Options;
 using UdemyMS.Microservices.Basket.WebApi.Services;
@@ -9,10 +13,17 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var requiredAuthorizationPolicy = new AuthorizationPolicyBuilder()
+            .RequireAuthenticatedUser()
+            .Build();
+
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
         services.AddRedisServices(configuration)
                 .AddCommonWebServices()
                 .AddScoped<IBasketService, BasketService>()
-                .AddControllers();
+                .AddCustomAuthentication(configuration)
+                .AddControllers(opts => opts.Filters.Add(new AuthorizeFilter(requiredAuthorizationPolicy)));
 
         services.AddEndpointsApiExplorer()
                 .AddSwaggerGen();
@@ -33,6 +44,19 @@ public static class DependencyInjection
 
             return redis;
         });
+
+        return services;
+    }
+
+    private static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opts =>
+                {
+                    opts.Authority = configuration[Common.Utilities.Constants.IdentityServer.ConfigName];
+                    opts.Audience = Common.Utilities.Constants.IdentityServer.Resources.Basket;
+                    opts.RequireHttpsMetadata = false;
+                });
 
         return services;
     }
