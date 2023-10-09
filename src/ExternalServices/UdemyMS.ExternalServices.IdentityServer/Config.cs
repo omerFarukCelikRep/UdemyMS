@@ -24,13 +24,15 @@ public static class Config
     {
         new ApiResource(Constants.IdentityServer.Resources.Catalog){Scopes = { Constants.IdentityServer.Permissions.Catalog } },
         new ApiResource(Constants.IdentityServer.Resources.PhotoStock){Scopes = { Constants.IdentityServer.Permissions.PhotoStock } },
+        new ApiResource(Constants.IdentityServer.Resources.Basket){Scopes = { Constants.IdentityServer.Permissions.Basket } },
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
 
     public static IEnumerable<ApiScope> ApiScopes => new ApiScope[]
     {
-        new ApiScope(Constants.IdentityServer.Permissions.Catalog,"Catalog Api Tam Erişim"),
-        new ApiScope(Constants.IdentityServer.Permissions.PhotoStock,"Photo Stock Api Tam Erişim"),
+        new ApiScope(Constants.IdentityServer.Permissions.Catalog,"Catalog Api Tam Erişim"), //TODO:Magic string
+        new ApiScope(Constants.IdentityServer.Permissions.PhotoStock,"Photo Stock Api Tam Erişim"), //TODO:Magic string
+        new ApiScope(Constants.IdentityServer.Permissions.Basket,"Basket Api Tam Erişim"), //TODO:Magic string
         new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -49,6 +51,7 @@ public static class Config
             {
                 Constants.IdentityServer.Permissions.Catalog,
                 Constants.IdentityServer.Permissions.PhotoStock,
+                Constants.IdentityServer.Permissions.Basket,
                 IdentityServerConstants.LocalApi.ScopeName
             }
         },
@@ -64,6 +67,7 @@ public static class Config
             AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
             AllowedScopes =
             {
+                Constants.IdentityServer.Permissions.Basket,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
