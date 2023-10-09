@@ -46,7 +46,7 @@ public class BasketService : IBasketService
                                         .StringSetAsync(basketCreateDto.UserId, JsonSerializer.Serialize(basketCreateDto));
 
         return status
-            ? Result.Success(StatusCodes.Status200OK)
+            ? Result.Success(StatusCodes.Status204NoContent)
             : Result.Error("Basket could not updated or saved", StatusCodes.Status400BadRequest); //TODO:Magic string
     }
 }
