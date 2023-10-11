@@ -37,7 +37,7 @@ public class DapperContext : IDapperContext
         ArgumentException.ThrowIfNullOrEmpty(query);
 
         if (cancellationToken.IsCancellationRequested)
-            await Task.FromCanceled<int>(cancellationToken);
+            await Task.FromCanceled<bool>(cancellationToken);
 
         var affectedRows = await _connection.ExecuteAsync(query, param);
 
