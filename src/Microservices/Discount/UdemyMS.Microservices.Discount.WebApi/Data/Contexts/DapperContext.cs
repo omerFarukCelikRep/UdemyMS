@@ -31,4 +31,16 @@ public class DapperContext : IDapperContext
 
         return values.FirstOrDefault();
     }
+
+    public async Task<bool> ExecuteAsync(string query, object? param = null, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(query);
+
+        if (cancellationToken.IsCancellationRequested)
+            await Task.FromCanceled<int>(cancellationToken);
+
+        var affectedRows = await _connection.ExecuteAsync(query, param);
+
+        return affectedRows > 0;
+    }
 }
