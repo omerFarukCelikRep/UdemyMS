@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
     <PackageReference Include="Npgsql" Version="7.0.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Core\UdemyMS.Common.Core.csproj" />
-    <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Utilities\UdemyMS.Common.Utilities.csproj" />
+    <ProjectReference Include="..\..\..\Common\UdemyMS.Common.Web\UdemyMS.Common.Web.csproj" />
   </ItemGroup>
 
 </Project>
