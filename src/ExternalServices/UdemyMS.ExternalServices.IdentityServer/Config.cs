@@ -22,9 +22,10 @@ public static class Config
 
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
     {
-        new ApiResource(Constants.IdentityServer.Resources.Catalog){Scopes = { Constants.IdentityServer.Permissions.Catalog } },
-        new ApiResource(Constants.IdentityServer.Resources.PhotoStock){Scopes = { Constants.IdentityServer.Permissions.PhotoStock } },
-        new ApiResource(Constants.IdentityServer.Resources.Basket){Scopes = { Constants.IdentityServer.Permissions.Basket } },
+        new ApiResource(Constants.IdentityServer.Resources.Catalog){ Scopes = { Constants.IdentityServer.Permissions.Catalog } },
+        new ApiResource(Constants.IdentityServer.Resources.PhotoStock){ Scopes = { Constants.IdentityServer.Permissions.PhotoStock } },
+        new ApiResource(Constants.IdentityServer.Resources.Basket){ Scopes = { Constants.IdentityServer.Permissions.Basket } },
+        new ApiResource(Constants.IdentityServer.Resources.Discount){ Scopes = { Constants.IdentityServer.Permissions.Discount } },
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -33,6 +34,7 @@ public static class Config
         new ApiScope(Constants.IdentityServer.Permissions.Catalog,"Catalog Api Tam Erişim"), //TODO:Magic string
         new ApiScope(Constants.IdentityServer.Permissions.PhotoStock,"Photo Stock Api Tam Erişim"), //TODO:Magic string
         new ApiScope(Constants.IdentityServer.Permissions.Basket,"Basket Api Tam Erişim"), //TODO:Magic string
+        new ApiScope(Constants.IdentityServer.Permissions.Discount,"Discount Api Tam Erişim"), //TODO:Magic string
         new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -51,7 +53,6 @@ public static class Config
             {
                 Constants.IdentityServer.Permissions.Catalog,
                 Constants.IdentityServer.Permissions.PhotoStock,
-                Constants.IdentityServer.Permissions.Basket,
                 IdentityServerConstants.LocalApi.ScopeName
             }
         },
@@ -68,12 +69,13 @@ public static class Config
             AllowedScopes =
             {
                 Constants.IdentityServer.Permissions.Basket,
+                Constants.IdentityServer.Permissions.Discount,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
                 IdentityServerConstants.StandardScopes.OfflineAccess,
                 IdentityServerConstants.LocalApi.ScopeName,
-                "roles"
+                Constants.Identity.Claim.Roles
             },
             AccessTokenLifetime = 1*60*60,
             RefreshTokenExpiration = TokenExpiration.Absolute,
