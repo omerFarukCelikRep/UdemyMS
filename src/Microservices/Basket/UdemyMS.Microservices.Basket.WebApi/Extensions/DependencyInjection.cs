@@ -17,7 +17,7 @@ public static class DependencyInjection
             .RequireAuthenticatedUser()
             .Build();
 
-        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove(Common.Utilities.Constants.Identity.Claim.Sub);
 
         services.AddRedisServices(configuration)
                 .AddCommonWebServices()
