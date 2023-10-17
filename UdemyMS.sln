@@ -54,6 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{9F7F4A31
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Order.Application", "src\Microservices\Order\UdemyMS.Microservices.Order.Application\UdemyMS.Microservices.Order.Application.csproj", "{29D1A32B-C36B-4DA2-8984-373B6A1A121B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyMS.Microservices.Order.Domain", "src\Microservices\Order\UdemyMS.Microservices.Order.Domain\UdemyMS.Microservices.Order.Domain.csproj", "{2636D144-D67C-46F9-AF62-C491CED27574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +114,10 @@ Global
 		{29D1A32B-C36B-4DA2-8984-373B6A1A121B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D1A32B-C36B-4DA2-8984-373B6A1A121B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D1A32B-C36B-4DA2-8984-373B6A1A121B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2636D144-D67C-46F9-AF62-C491CED27574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2636D144-D67C-46F9-AF62-C491CED27574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2636D144-D67C-46F9-AF62-C491CED27574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2636D144-D67C-46F9-AF62-C491CED27574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +145,7 @@ Global
 		{ADAA93A6-E160-4062-9AFC-E0CC9C3C0301} = {9F7F4A31-3FFD-4B35-ADC9-B2B8B24905DB}
 		{9F7F4A31-3FFD-4B35-ADC9-B2B8B24905DB} = {742889C8-C2A8-4EF4-A667-3745D8382C7B}
 		{29D1A32B-C36B-4DA2-8984-373B6A1A121B} = {9F7F4A31-3FFD-4B35-ADC9-B2B8B24905DB}
+		{2636D144-D67C-46F9-AF62-C491CED27574} = {9F7F4A31-3FFD-4B35-ADC9-B2B8B24905DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A628549-523B-40DA-97F0-65E5DE0ADC72}
