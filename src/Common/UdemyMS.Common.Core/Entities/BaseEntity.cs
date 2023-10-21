@@ -10,7 +10,7 @@ public abstract class BaseEntity<TId> where TId : struct
     public TId Id { get; set; }
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-    public bool IsTransient() => Id == (TId)default;
+    public bool IsTransient() => Id.Equals((TId)default);
 
     public override int GetHashCode()
     {
@@ -28,10 +28,10 @@ public abstract class BaseEntity<TId> where TId : struct
         if (GetType() != obj.GetType())
             return false;
 
-        if (entity.IsTransient() || this.IsTransient())
+        if (entity.IsTransient() || IsTransient())
             return false;
 
-        return entity.Id == Id;
+        return entity.Id.Equals(Id);
     }
 
     public static bool operator ==(BaseEntity<TId> left, BaseEntity<TId> right)
