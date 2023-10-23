@@ -1,9 +1,15 @@
 ﻿namespace UdemyMS.Microservices.Order.Application.Dtos;
-public class OrderDto
+public record OrderDto(int Id,
+                       DateTime CreatedDate,
+                       AddressDto Address,
+                       string UserId,
+                       List<OrderItemDto> OrderItems)
 {
-    public int Id { get; set; }
-    public DateTime CreatedDate { get; set; }
-    public AddressDto Address { get; set; }
-    public string UserId { get; set; }
-    public List<OrderItemDto> OrderItems { get; set; }
+    public static implicit operator OrderDto(Domain.Orders.Order order) => new(
+        order.Id,
+        order.CreatedDate,
+        order.Address,
+        order.UserId,
+        order.OrderItems.Select(x => (OrderItemDto)x)
+                        .ToList());
 }
