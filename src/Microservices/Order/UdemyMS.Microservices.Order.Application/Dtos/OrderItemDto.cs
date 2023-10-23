@@ -1,8 +1,11 @@
-﻿namespace UdemyMS.Microservices.Order.Application.Dtos;
-public class OrderItemDto
+﻿using UdemyMS.Microservices.Order.Domain.Orders.Entities;
+
+namespace UdemyMS.Microservices.Order.Application.Dtos;
+public record OrderItemDto(string ProductId, string ProductName, string Thumbnail, decimal Price)
 {
-    public string ProductId { get; private set; }
-    public string ProductName { get; private set; }
-    public string Thumbnail { get; private set; }
-    public decimal Price { get; private set; }
+    public static implicit operator OrderItemDto(OrderItem orderItem) => new(
+        orderItem.ProductId,
+        orderItem.ProductName,
+        orderItem.Thumbnail,
+        orderItem.Price);
 }
