@@ -9,7 +9,8 @@ public class BaseRepository<TEntity, TId> :
     IAsyncRepository,
     IAsyncInsertableRepository<TEntity, TId>,
     IAsyncDeleteableRepository<TEntity, TId>,
-    IAsyncUpdateableRepository<TEntity, TId>
+    IAsyncUpdateableRepository<TEntity, TId>,
+    IAsyncQueryableRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -63,6 +64,25 @@ public class BaseRepository<TEntity, TId> :
         var entity = await _table.FindAsync(new object?[] { id }, cancellationToken) ?? throw new Exception(); //TODO : DBException
 
         await DeleteAsync(entity, cancellationToken);
+    }
+
+    public Task<IQueryable<TEntity>> GetAllAsync(bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        if (cancellationToken.IsCancellationRequested)
+            return Task.FromCanceled<IQueryable<TEntity>>(cancellationToken);
+
+        var query = tracking
+            ? _table
+            : _table.AsNoTracking();
+
+        return Task.FromResult(query);
+    }
+
+    public async Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(tracking, cancellationToken);
+
+        return query.Where(expression);
     }
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
