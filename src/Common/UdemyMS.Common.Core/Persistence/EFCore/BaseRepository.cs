@@ -10,7 +10,8 @@ public class BaseRepository<TEntity, TId> :
     IAsyncInsertableRepository<TEntity, TId>,
     IAsyncDeleteableRepository<TEntity, TId>,
     IAsyncUpdateableRepository<TEntity, TId>,
-    IAsyncQueryableRepository<TEntity, TId>
+    IAsyncQueryableRepository<TEntity, TId>,
+    IAsyncFindableRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -31,6 +32,13 @@ public class BaseRepository<TEntity, TId> :
     public Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
     {
         return _table.AddRangeAsync(entities, cancellationToken);
+    }
+
+    public Task<bool> AnyAsync(Expression<Func<TEntity, bool>>? expression = null, CancellationToken cancellationToken = default)
+    {
+        return expression is null
+            ? _table.AnyAsync(cancellationToken)
+            : _table.AnyAsync(expression, cancellationToken);
     }
 
     public Task BulkDeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
@@ -83,6 +91,18 @@ public class BaseRepository<TEntity, TId> :
         var query = await GetAllAsync(tracking, cancellationToken);
 
         return query.Where(expression);
+    }
+
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(tracking, cancellationToken);
+        return await query.FirstOrDefaultAsync(expression, cancellationToken);
+    }
+
+    public async Task<TEntity?> GetByIdAsync(TId id, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(tracking, cancellationToken);
+        return await query.FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
     }
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
