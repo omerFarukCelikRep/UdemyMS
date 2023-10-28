@@ -6,6 +6,6 @@ public interface IAsyncQueryableRepository<TEntity, TId> : IAsyncRepository
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
-    Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = true, CancellationToken cancellationToken = default);
-    Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression, bool tracking = true, CancellationToken cancellationToken = default);
+    Task<IQueryable<TEntity>> GetAllAsync(bool tracking = true, CancellationToken cancellationToken = default);
+    Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression, bool tracking = true, CancellationToken cancellationToken = default);
 }
