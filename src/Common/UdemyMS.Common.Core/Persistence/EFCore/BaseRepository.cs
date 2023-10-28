@@ -1,11 +1,13 @@
 ﻿using BlogApp.Core.DataAccess.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using UdemyMS.Common.Core.Entities;
 
 namespace UdemyMS.Common.Core.Persistence.EFCore;
 public class BaseRepository<TEntity, TId> :
     IAsyncRepository,
-    IAsyncInsertableRepository<TEntity, TId>
+    IAsyncInsertableRepository<TEntity, TId>,
+    IAsyncDeleteableRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -28,6 +30,27 @@ public class BaseRepository<TEntity, TId> :
         return _table.AddRangeAsync(entities, cancellationToken);
     }
 
+    public Task BulkDeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        return _table.Where(predicate)
+                     .ExecuteDeleteAsync(cancellationToken);
+    }
+
+    public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        if (cancellationToken.IsCancellationRequested)
+            return Task.FromCanceled(cancellationToken);
+
+        _table.Remove(entity);
+        return Task.CompletedTask;
+    }
+
+    public async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
+    {
+        var entity = await _table.FindAsync(new object?[] { id }, cancellationToken) ?? throw new Exception(); //TODO : DBException
+
+        await DeleteAsync(entity, cancellationToken);
+    }
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
