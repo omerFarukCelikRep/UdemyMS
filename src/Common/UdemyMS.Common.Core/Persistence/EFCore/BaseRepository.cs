@@ -11,7 +11,8 @@ public class BaseRepository<TEntity, TId> :
     IAsyncDeleteableRepository<TEntity, TId>,
     IAsyncUpdateableRepository<TEntity, TId>,
     IAsyncQueryableRepository<TEntity, TId>,
-    IAsyncFindableRepository<TEntity, TId>
+    IAsyncFindableRepository<TEntity, TId>,
+    IAsyncOrderableRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -91,6 +92,34 @@ public class BaseRepository<TEntity, TId> :
         var query = await GetAllAsync(tracking, cancellationToken);
 
         return query.Where(expression);
+    }
+
+    public async Task<IQueryable<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> orderby, bool orderDesc = false, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(tracking, cancellationToken);
+        return orderDesc
+            ? query.OrderByDescending(orderby)
+            : query.OrderBy(orderby);
+    }
+
+    public async Task<IQueryable<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> orderby, bool orderDesc = false, int takeCount = 0, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(orderby, orderDesc, tracking, cancellationToken);
+        return query.Take(takeCount);
+    }
+
+    public async Task<IQueryable<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, TKey>> orderby, bool orderDesc = false, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(expression, tracking, cancellationToken);
+        return orderDesc
+            ? query.OrderByDescending(orderby)
+            : query.OrderBy(orderby);
+    }
+
+    public async Task<IQueryable<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, TKey>> orderby, bool orderDesc = false, int takeCount = 0, bool tracking = true, CancellationToken cancellationToken = default)
+    {
+        var query = await GetAllAsync(expression, orderby, orderDesc, tracking, cancellationToken);
+        return query.Take(takeCount);
     }
 
     public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression, bool tracking = true, CancellationToken cancellationToken = default)
