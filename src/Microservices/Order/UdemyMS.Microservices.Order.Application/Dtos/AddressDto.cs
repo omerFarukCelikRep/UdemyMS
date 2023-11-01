@@ -9,4 +9,10 @@ public record AddressDto(string Province, string District, string Street, string
         address.Street,
         address.ZipCode,
         address.Line);
+
+    public static implicit operator Address(AddressDto addressDto) => new(addressDto.Province,
+                                                                          addressDto.District,
+                                                                          addressDto.Street,
+                                                                          addressDto.ZipCode,
+                                                                          addressDto.Line);
 }
